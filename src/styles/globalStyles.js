@@ -63,6 +63,7 @@ body {
 background-color: #0E0E13;
 font-family: 'Roboto', sans-serif;
 color: white;
+font-weight: 400;
 }
 
 `;

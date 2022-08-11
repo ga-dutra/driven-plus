@@ -18,7 +18,10 @@ function getPlans(config) {
 }
 
 function getPlan(config, planId) {
-  const promise = axios.get(`${base_url}/subscriptions/${planId}`, config);
+  const promise = axios.get(
+    `${base_url}/subscriptions/memberships/${planId}`,
+    config
+  );
   return promise;
 }
 

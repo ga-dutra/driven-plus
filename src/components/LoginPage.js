@@ -10,7 +10,7 @@ export default function LoginPage() {
   const [form, setForm] = useState({});
   const navigate = useNavigate();
   const userStored = JSON.parse(localStorage.getItem("user"));
-  const { setUserdata } = useContext(UserContext);
+  const { setUserdata, setConfig } = useContext(UserContext);
 
   function localStorageLogin() {
     if (userStored) {
@@ -23,6 +23,9 @@ export default function LoginPage() {
         setUserdata(res.data);
         console.log(res.data);
         console.log("login pelo localstorage");
+        setConfig({
+          headers: { Authorization: `Bearer ${res.data.token}` },
+        });
         navigate("/subscriptions");
       });
       promise.catch((err) => {
@@ -30,9 +33,8 @@ export default function LoginPage() {
       });
     }
   }
-  useEffect(() => {
-    localStorageLogin();
-  }, []);
+
+  localStorageLogin();
 
   function handleForm({ value, name }) {
     console.log(value, name);
@@ -48,6 +50,9 @@ export default function LoginPage() {
     promise.then((res) => {
       localStorage.setItem("user", JSON.stringify(res.data));
       setUserdata(res.data);
+      setConfig({
+        headers: { Authorization: `Bearer ${res.data.token}` },
+      });
       navigate("/subscriptions");
     });
     promise.catch((err) => {
