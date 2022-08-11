@@ -1,16 +1,59 @@
 import drivenLogo from "../assets/img/drivenLogo.svg";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
+import { postLogin } from "../services/drivenplus";
 
 export default function LoginPage() {
   const [form, setForm] = useState({});
+  const navigate = useNavigate();
+  const userStored = JSON.parse(localStorage.getItem("user"));
+  const { setUserdata } = useContext(UserContext);
+
+  function localStorageLogin() {
+    if (userStored) {
+      const userStoredData = {
+        email: userStored.email,
+        password: userStored.password,
+      };
+      const promise = postLogin(userStoredData);
+      promise.then((res) => {
+        setUserdata(res.data);
+        console.log(res.data);
+        console.log("login pelo localstorage");
+        navigate("/subscriptions");
+      });
+      promise.catch((err) => {
+        return;
+      });
+    }
+  }
+  useEffect(() => {
+    localStorageLogin();
+  }, []);
 
   function handleForm({ value, name }) {
     console.log(value, name);
     setForm({
       ...form,
       [name]: value,
+    });
+  }
+
+  function sendForm() {
+    const body = { ...form };
+    const promise = postLogin(body);
+    promise.then((res) => {
+      localStorage.setItem("user", JSON.stringify(res.data));
+      setUserdata(res.data);
+      navigate("/subscriptions");
+    });
+    promise.catch((err) => {
+      alert(
+        "Não foi possível efetuar o login! Por favor, cheque seus dados e tente novamente."
+      );
     });
   }
 
@@ -21,6 +64,7 @@ export default function LoginPage() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+            sendForm();
           }}
         >
           <input

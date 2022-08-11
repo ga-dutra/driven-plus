@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import { FormWrapper } from "./LoginPage";
 import styled from "styled-components";
 import { useState } from "react";
+import { postSignUp } from "../services/drivenplus";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
   const [form, setForm] = useState({});
+  const navigate = useNavigate();
 
   function handleForm({ value, name }) {
     console.log(value, name);
@@ -14,16 +17,28 @@ export default function SignUpPage() {
     });
   }
 
+  function sendForm() {
+    const body = { ...form };
+    const promise = postSignUp(body);
+    promise.then((res) => navigate("/"));
+    promise.catch((err) =>
+      alert(
+        "Não foi possível concluir o cadastro! Por favor, cheque seus dados e tente novamente."
+      )
+    );
+  }
+
   return (
     <Wrapper>
       <FormWrapper>
         <form
           onSubmit={(e) => {
             e.preventDefault();
+            sendForm();
           }}
         >
           <input
-            placeholder="nome"
+            placeholder="Nome"
             name="name"
             type="text"
             onChange={(e) => {
