@@ -113,7 +113,7 @@ export default function UserUpdatePage() {
 
 const Wrapper = styled.div`
   margin: 0 38px;
-  margin-top: 220px;
+  margin-top: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;
