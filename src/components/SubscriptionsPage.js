@@ -16,7 +16,6 @@ export default function SubscriptionsPage() {
       setPlansdata(res.data);
     });
     promise.catch((err) => console.log("erro na requisição dos planos"));
-    console.log(plansdata);
   }, [config]);
   const navigate = useNavigate();
 

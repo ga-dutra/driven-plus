@@ -16,19 +16,16 @@ export default function UserUpdatePage() {
   const navigate = useNavigate();
 
   function handleForm({ value, name }) {
-    console.log(value, name);
     setForm({
       ...form,
       [name]: value,
     });
-    console.log(`form: ${JSON.stringify(form)}`);
   }
 
   function sendForm() {
     const body = { ...form };
     const promise = putChangeUser(body, config);
     promise.then((res) => {
-      console.log("usuário alterado com sucesso");
       setUserdata(res.data);
       navigate("/home");
     });

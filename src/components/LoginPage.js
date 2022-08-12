@@ -31,8 +31,6 @@ export default function LoginPage() {
       const promise = postLogin(userStoredData);
       promise.then((res) => {
         setUserdata(res.data);
-        console.log(res.data);
-        console.log("login pelo localstorage");
         setConfig({
           headers: { Authorization: `Bearer ${res.data.token}` },
         });
@@ -48,7 +46,6 @@ export default function LoginPage() {
   }, []);
 
   function handleForm({ value, name }) {
-    console.log(value, name);
     setForm({
       ...form,
       [name]: value,

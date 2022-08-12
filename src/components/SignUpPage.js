@@ -10,7 +10,6 @@ export default function SignUpPage() {
   const navigate = useNavigate();
 
   function handleForm({ value, name }) {
-    console.log(value, name);
     setForm({
       ...form,
       [name]: value,

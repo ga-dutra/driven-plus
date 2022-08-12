@@ -10,13 +10,10 @@ export default function HomePage() {
   const { plansdata } = useContext(PlansContext);
   const { userdata, config } = useContext(UserContext);
   const navigate = useNavigate();
-  console.log(`plansdata: ${JSON.stringify(plansdata)}`);
-  console.log(`userdata: ${JSON.stringify(userdata)}`);
 
   function cancelPlan() {
     const promise = deletePlan(config);
     promise.then((res) => {
-      console.log("plano cancelado com sucesso");
       navigate("/subscriptions");
     });
     promise.catch((err) => console.log("Erro ao tentar cancelar o plano."));
@@ -42,7 +39,7 @@ export default function HomePage() {
       </ContendContainer>
       <FooterContainer>
         <Button onClick={() => navigate("/subscriptions")}>Mudar Plano</Button>
-        <Button onClick={cancelPlan}>Cancelar</Button>
+        <Button onClick={cancelPlan}>Cancelar Plano</Button>
       </FooterContainer>
     </Wrapper>
   );

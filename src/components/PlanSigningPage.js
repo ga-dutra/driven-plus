@@ -23,14 +23,12 @@ export default function PlanSigningPage() {
     const promise = getPlan(config, planId);
     promise.then((res) => {
       setPlanInfo(res.data);
-      console.log(planInfo);
       setForm({ ...form, membershipId: Number(planId) });
     });
     promise.catch((err) => console.log("erro na requisição do plano"));
   }, []);
 
   function handleForm({ value, name }) {
-    console.log(value, name);
     setForm({
       ...form,
       [name]: value,
@@ -44,9 +42,7 @@ export default function PlanSigningPage() {
     const body = { ...form };
     const promise = postSubscriptionPlan(body, config);
     promise.then((res) => {
-      console.log(res.data);
       setPlansdata(res.data.membership);
-      console.log("Plano assinado com sucesso");
       navigate("/home");
     });
     promise.catch((err) => {
