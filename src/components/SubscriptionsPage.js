@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PlansContext } from "../contexts/PlansContext";
 import { useContext, useEffect } from "react";
 import { getPlans } from "../services/drivenplus";

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
+import { PlansContext } from "../contexts/PlansContext";
 import { getPlan, postSubscriptionPlan } from "../services/drivenplus";
 import LoadingAnimation from "./LoadingAnimation";
 import { LoadingAnimationWrapper } from "./SubscriptionsPage";
@@ -11,6 +12,7 @@ import closeIcon from "../assets/img/closeIcon.svg";
 
 export default function PlanSigningPage() {
   const { config } = useContext(UserContext);
+  const { setPlansdata } = useContext(PlansContext);
   const planId = useParams().planId;
   const [planInfo, setPlanInfo] = useState({});
   const [form, setForm] = useState({});
@@ -43,6 +45,7 @@ export default function PlanSigningPage() {
     const promise = postSubscriptionPlan(body, config);
     promise.then((res) => {
       console.log(res.data);
+      setPlansdata(res.data.membership);
       console.log("Plano assinado com sucesso");
       navigate("/home");
     });
@@ -51,6 +54,7 @@ export default function PlanSigningPage() {
       alert(
         "Houve um erro ao completar a assinatura do plano. Por favor, revise seus dados e tente novamente."
       );
+      setConfirmButton(false);
     });
   }
 

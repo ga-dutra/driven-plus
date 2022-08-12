@@ -1,16 +1,26 @@
 import drivenLogo from "../assets/img/drivenLogo.svg";
 import styled from "styled-components";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { postLogin } from "../services/drivenplus";
+import { PlansContext } from "../contexts/PlansContext";
 
 export default function LoginPage() {
   const [form, setForm] = useState({});
   const navigate = useNavigate();
   const userStored = JSON.parse(localStorage.getItem("user"));
   const { setUserdata, setConfig } = useContext(UserContext);
+  const { setPlansdata } = useContext(PlansContext);
+
+  function hasPlan(membership) {
+    if (!membership) navigate("/subscriptions");
+    else {
+      setPlansdata(membership);
+      navigate("/home");
+    }
+  }
 
   function localStorageLogin() {
     if (userStored) {
@@ -26,7 +36,7 @@ export default function LoginPage() {
         setConfig({
           headers: { Authorization: `Bearer ${res.data.token}` },
         });
-        navigate("/subscriptions");
+        hasPlan(res.data.membership);
       });
       promise.catch((err) => {
         return;
@@ -53,7 +63,7 @@ export default function LoginPage() {
       setConfig({
         headers: { Authorization: `Bearer ${res.data.token}` },
       });
-      navigate("/subscriptions");
+      hasPlan(res.data.membership);
     });
     promise.catch((err) => {
       alert(
