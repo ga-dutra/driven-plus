@@ -3,6 +3,7 @@ import GlobalStyle from "../styles/globalStyles";
 import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
 import SubscriptionsPage from "./SubscriptionsPage";
+import HomePage from "./HomePage";
 import { UserStorage } from "../contexts/UserContext";
 import { PlansStorage } from "../contexts/PlansContext";
 import PlanSigningPage from "./PlanSigningPage";
@@ -22,6 +23,7 @@ export default function App() {
                 path="/subscriptions/:planId"
                 element={<PlanSigningPage />}
               />
+              <Route path="/home" element={<HomePage />} />
             </Routes>
           </BrowserRouter>
         </PlansStorage>
