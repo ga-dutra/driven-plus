@@ -1,6 +1,6 @@
 import drivenLogo from "../assets/img/drivenLogo.svg";
 import styled from "styled-components";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
@@ -43,8 +43,9 @@ export default function LoginPage() {
       });
     }
   }
-
-  localStorageLogin();
+  useEffect(() => {
+    localStorageLogin();
+  }, []);
 
   function handleForm({ value, name }) {
     console.log(value, name);

@@ -26,7 +26,11 @@ export default function HomePage() {
     <Wrapper>
       <Header>
         <img src={plansdata.image} alt="" />
-        <img src={userIcon} alt="" />
+        <img
+          onClick={() => navigate(`/users/${userdata.id}`)}
+          src={userIcon}
+          alt=""
+        />
       </Header>
       <ContendContainer>
         <p>Olá, {userdata.name}</p>
@@ -62,6 +66,7 @@ const Wrapper = styled.div`
   img:nth-child(2) {
     top: 22px;
     right: 22px;
+    cursor: pointer;
   }
 `;
 

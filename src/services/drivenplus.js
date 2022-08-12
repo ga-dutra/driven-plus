@@ -41,7 +41,7 @@ function deletePlan(config) {
 }
 
 function putChangeUser(body, config) {
-  const promise = axios.put(`${base_url}/users/`);
+  const promise = axios.put(`${base_url}/users/`, body, config);
   return promise;
 }
 

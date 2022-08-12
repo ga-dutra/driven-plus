@@ -4,6 +4,8 @@ import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
 import SubscriptionsPage from "./SubscriptionsPage";
 import HomePage from "./HomePage";
+import UserPage from "./UserPage";
+import UserUpdatePage from "./UserUpdatePage";
 import { UserStorage } from "../contexts/UserContext";
 import { PlansStorage } from "../contexts/PlansContext";
 import PlanSigningPage from "./PlanSigningPage";
@@ -24,6 +26,11 @@ export default function App() {
                 element={<PlanSigningPage />}
               />
               <Route path="/home" element={<HomePage />} />
+              <Route path="/users/:userId" element={<UserPage />} />
+              <Route
+                path="/users/:userId/update"
+                element={<UserUpdatePage />}
+              />
             </Routes>
           </BrowserRouter>
         </PlansStorage>
