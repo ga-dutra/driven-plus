@@ -69,11 +69,6 @@ export default function UserUpdatePage() {
                 : userdata.cpf
             }
             name="cpf"
-            type="text"
-            onChange={(e) => {
-              handleForm({ name: e.target.name, value: e.target.value });
-            }}
-            required
           ></input>
           <input
             placeholder={userdata.email}
@@ -115,6 +110,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  input:nth-child(2) {
+    pointer-events: none;
+  }
 
   ion-icon {
     position: fixed;

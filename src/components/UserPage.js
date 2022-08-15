@@ -31,10 +31,10 @@ export default function UserPage() {
             }
           ></input>
           <input placeholder={userdata.email}></input>
-          <button onClick={() => navigate(`/users/${userdata.id}/update`)}>
-            ATUALIZAR
-          </button>
         </form>
+        <button onClick={() => navigate(`/users/${userdata.id}/update`)}>
+          ATUALIZAR
+        </button>
       </FormWrapper>
     </Wrapper>
   );
@@ -47,6 +47,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  button {
+    width: 100%;
+  }
 
   ion-icon {
     position: fixed;
